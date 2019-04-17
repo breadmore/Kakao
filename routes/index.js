@@ -49,50 +49,6 @@ router.post('/showAll',function (req,res) {
         if(err){
             res.status(500).send(err);
         }else{
-            const responseBody = {
-
-                "intent": {
-                "id": "s22t9zn0npzk4yyndha8wdzc",
-                    "name": "블록 이름"
-            },
-                "userRequest": {
-                "timezone": "Asia/Seoul",
-                    "params": {
-                    "ignoreMe": "true"
-                },
-                "block": {
-                    "id": "s22t9zn0npzk4yyndha8wdzc",
-                        "name": "블록 이름"
-                },
-                "utterance": "발화 내용",
-                    "lang": null,
-                    "user": {
-                    "id": "483931",
-                        "type": "accountId",
-                        "properties": {}
-                }
-            },
-                "bot": {
-                "id": "5cb021d3e821270bd1ef662a",
-                    "name": "봇 이름"
-            },
-                "action": {
-                "name": "3en6lfxd7q",
-                    "clientExtra": null,
-                    "params": {
-                    "menu": "americano"
-                },
-                "id": "mtgdg4ogh80p46yp8zi4bo8v",
-                    "detailParams": {
-                    "menu": {
-                        "origin": "americano",
-                            "value": "americano",
-                            "groupName": ""
-                    }
-                }
-            }
-
-            };
             res.status(200).send(responseBody);
         }
     });
