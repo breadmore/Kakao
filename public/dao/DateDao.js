@@ -21,7 +21,7 @@ selectDayWork: function (callback) {
         return db.query('select CAL_DAY from jdDate where state = \'주\'',callback);
     },
 selectTodayWork: function (callback) {
-        return db.query('select CAL_DAY, state from jdDate',callback);
+        return db.query('select CAL_DAY, state from jdDate where CAL_DAY=(date_format(now(), \'%d\')+0)',callback);
     }
 };
 
