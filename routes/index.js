@@ -147,7 +147,7 @@ router.post('/showTodayWork',function (req,res) {
         }else{
             var temp="";
             var string="휴일은 ";
-            string=string+temp.concat(result[i].CAL_DAY);
+            string=string+temp.concat(result.CAL_DAY);
 
 
             const responseBody = {
