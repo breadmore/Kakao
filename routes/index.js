@@ -13,10 +13,15 @@ router.get('/', function(req, res, next) {
         {
             cal:"3",
             state:"4"
+        },
+        {
+            cal:"5",
+            state:"6"
         }
     ];
 
-    res.render('index', { title: result[0].cal});
+
+    res.render('index', { title:"hello"});
 });
 
 router.post('/sayHello', function(req, res) {
@@ -61,13 +66,21 @@ router.post('/showAll',function (req,res) {
         if(err){
             res.status(500).send(err);
         }else{
+            var temp="";
+            var string="휴일은 ";
+            for(var i=0; i<result.length; i++){
+                if(i<result.length-1)
+                    string=string+temp.concat(result[i].CAL_DAY+", ")
+                else
+                    string=string+temp.concat(result[i].CAL_DAY)
+            }
             const responseBody = {
                 version: "2.0",
                 template: {
                     outputs: [
                         {
                             simpleText: {
-                                result
+                                text:string
                             }
                         }
                     ]
@@ -113,20 +126,21 @@ router.post('/showNonWork',function (req,res) {
         if(err){
             res.status(500).send(err);
         }else{
-            var temp=new Array();
-
+            var temp="휴일은";
             for(var i=0; i<result.length; i++){
-            temp[i]=result[i].CAL_DAY;
+                if(i<result.length-1)
+                    temp.concat(result[i].CAL_DAY+", ")
+                else
+                temp.concat(result[i].CAL_DAY)
             }
+
             const responseBody = {
                 version: "2.0",
                 template: {
                     outputs: [
                         {
                             simpleText: {
-                                text : temp.forEach(function (e) {
-                                    "휴일은 " + e
-                                })
+                                text : temp
                             }
                         }
                     ]
