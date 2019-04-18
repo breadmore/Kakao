@@ -49,7 +49,19 @@ router.post('/showAll',function (req,res) {
         if(err){
             res.status(500).send(err);
         }else{
-            res.status(200).send(result);
+            const responseBody = {
+                version: "2.0",
+                template: {
+                    outputs: [
+                        {
+                            simpleText: {
+                                text: result
+                            }
+                        }
+                    ]
+                }
+            };
+            res.status(200).send(responseBody);
         }
     });
 });
