@@ -19,12 +19,15 @@ function getNonWork(callback){
 function getDayWork(callback){
     dateDao.selectDayWork(callback);
 }
-
+function getTodayWork(callback){
+    dateDao.selectTodayWork(callback);
+}
 module.exports = {
     getAllDate:getAllDate,
     getNightShift:getNightShift,
     getNightShiftB:getNightShiftB,
     getNonShift:getNonShift,
     getNonWork:getNonWork,
-    getDayWork:getDayWork
+    getDayWork:getDayWork,
+    getTodayWork:getTodayWork
 };

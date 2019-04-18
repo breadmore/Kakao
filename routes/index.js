@@ -101,7 +101,33 @@ router.post('/showNonShift',function (req,res) {
 })
 
 router.post('/showNonWork',function (req,res) {
-
+    dateService.getNonWork(function (err, result) {
+        if(err){
+            res.status(500).send(err);
+        }else{
+            var temp="";
+            var string="휴일은 ";
+            for(var i=0; i<result.length; i++){
+                if(i<result.length-1)
+                    string=string+temp.concat(result[i].CAL_DAY+", ")
+                else
+                    string=string+temp.concat(result[i].CAL_DAY)
+            }
+            const responseBody = {
+                version: "2.0",
+                template: {
+                    outputs: [
+                        {
+                            simpleText: {
+                                text : string
+                            }
+                        }
+                    ]
+                }
+            };
+            res.status(200).send(responseBody);
+        }
+    });
 })
 
 router.post('/showDayWork',function (req,res) {
@@ -115,14 +141,14 @@ router.post('/showDayWork',function (req,res) {
 })
 
 router.post('/showTodayWork',function (req,res) {
-
     dateService.getTodayWork(function (err, result) {
         if(err){
             res.status(500).send(err);
         }else{
             var temp="";
-            var string="오늘은 ";
-            string=string+temp.concat(result[0].state) + " 란다!";
+            var string="휴일은 ";
+            string=string+temp.concat(result[i].CAL_DAY);
+
 
             const responseBody = {
                 version: "2.0",
@@ -139,7 +165,6 @@ router.post('/showTodayWork',function (req,res) {
             res.status(200).send(responseBody);
         }
     });
-
 })
 
 
