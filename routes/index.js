@@ -141,4 +141,31 @@ router.post('/showDayWork',function (req,res) {
     });
 })
 
+router.post('/showTodayWork',function (req,res) {
+    dateService.getTodayWork(function (err, result) {
+        if(err){
+            res.status(500).send(err);
+        }else{
+            var temp="";
+            var string="오늘은 ";
+            string=string+temp.concat(result[0].state) + " 란다!"
+
+            const responseBody = {
+                version: "2.0",
+                template: {
+                    outputs: [
+                        {
+                            simpleText: {
+                                text : string
+                            }
+                        }
+                    ]
+                }
+            };
+            res.status(200).send(responseBody);
+        }
+    });
+})
+
+
 module.exports = router;
