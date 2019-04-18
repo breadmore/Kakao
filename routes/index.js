@@ -4,14 +4,19 @@ var dateService = require('../public/service/DateService');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    dateService.getAllDate(function (err, result) {
-        if(err){
-            res.status(500).send(err);
-        }else{
-            res.render('index', { title: result[1].state });
-        }
-    });
 
+    var result=[
+        {
+        cal:"1",
+        state:"2"
+    },
+        {
+            cal:"3",
+            state:"4"
+        }
+    ];
+
+    res.render('index', { title: result[0].cal});
 });
 
 router.post('/sayHello', function(req, res) {
@@ -108,14 +113,19 @@ router.post('/showNonWork',function (req,res) {
         if(err){
             res.status(500).send(err);
         }else{
+            var temp=new Array();
+
+            for(var i=0; i<result.length; i++){
+            temp[i]=result[i].CAL_DAY;
+            }
             const responseBody = {
                 version: "2.0",
                 template: {
                     outputs: [
                         {
                             simpleText: {
-                                text : result.forEach(function (ele) {
-                                    ele
+                                text : temp.forEach(function (e) {
+                                    "휴일은 " + e
                                 })
                             }
                         }
