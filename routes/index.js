@@ -146,8 +146,8 @@ router.post('/showTodayWork',function (req,res) {
             res.status(500).send(err);
         }else{
             var temp="";
-            var string="휴일은 ";
-            string=string+temp.concat(result[0].CAL_DAY);
+            var string="오늘은 ";
+            string=string+temp.concat(result[0].state) + " 란다!";
 
 
             const responseBody = {
