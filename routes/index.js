@@ -55,7 +55,7 @@ router.post('/showAll',function (req,res) {
                     outputs: [
                         {
                             simpleText: {
-                                text: "hello"
+                                result
                             }
                         }
                     ]
