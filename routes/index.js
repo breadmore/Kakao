@@ -4,7 +4,14 @@ var dateService = require('../public/service/DateService');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+    dateService.getAllDate(function (err, result) {
+        if(err){
+            res.status(500).send(err);
+        }else{
+            res.render('index', { title: result[1].state });
+        }
+    });
+
 });
 
 router.post('/sayHello', function(req, res) {
@@ -107,7 +114,9 @@ router.post('/showNonWork',function (req,res) {
                     outputs: [
                         {
                             simpleText: {
-                                result
+                                text : result.forEach(function (ele) {
+                                    ele
+                                })
                             }
                         }
                     ]
