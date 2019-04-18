@@ -42,7 +42,6 @@ router.post('/sayHello', function(req, res) {
 });
 
 router.post('/showHello', function(req, res) {
-    console.log(req.body);
 
     const responseBody = {
         version: "2.0",
@@ -102,6 +101,45 @@ router.post('/showNonShift',function (req,res) {
 })
 
 router.post('/showNonWork',function (req,res) {
+
+})
+
+router.post('/showDayWork',function (req,res) {
+    dateService.getDayWork(function (err, result) {
+        if(err){
+            res.status(500).send(err);
+        }else{
+            res.status(200).send(result);
+        }
+    });
+})
+
+router.post('/showTodayWork',function (req,res) {
+    /*
+    dateService.getTodayWork(function (err, result) {
+        if(err){
+            res.status(500).send(err);
+        }else{
+            var temp="";
+            var string="오늘은 ";
+            string=string+temp.concat(result[0].state) + " 란다!"
+
+            const responseBody = {
+                version: "2.0",
+                template: {
+                    outputs: [
+                        {
+                            simpleText: {
+                                text : string
+                            }
+                        }
+                    ]
+                }
+            };
+            res.status(200).send(responseBody);
+        }
+    });
+    */
     dateService.getNonWork(function (err, result) {
         if(err){
             res.status(500).send(err);
@@ -129,42 +167,7 @@ router.post('/showNonWork',function (req,res) {
             res.status(200).send(responseBody);
         }
     });
-})
 
-router.post('/showDayWork',function (req,res) {
-    dateService.getDayWork(function (err, result) {
-        if(err){
-            res.status(500).send(err);
-        }else{
-            res.status(200).send(result);
-        }
-    });
-})
-
-router.post('/showTodayWork',function (req,res) {
-    dateService.getTodayWork(function (err, result) {
-        if(err){
-            res.status(500).send(err);
-        }else{
-            var temp="";
-            var string="오늘은 ";
-            string=string+temp.concat(result[0].state) + " 란다!"
-
-            const responseBody = {
-                version: "2.0",
-                template: {
-                    outputs: [
-                        {
-                            simpleText: {
-                                text : string
-                            }
-                        }
-                    ]
-                }
-            };
-            res.status(200).send(responseBody);
-        }
-    });
 })
 
 
