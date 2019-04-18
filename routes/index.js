@@ -66,27 +66,7 @@ router.post('/showAll',function (req,res) {
         if(err){
             res.status(500).send(err);
         }else{
-            var temp="";
-            var string="휴일은 ";
-            for(var i=0; i<result.length; i++){
-                if(i<result.length-1)
-                    string=string+temp.concat(result[i].CAL_DAY+", ")
-                else
-                    string=string+temp.concat(result[i].CAL_DAY)
-            }
-            const responseBody = {
-                version: "2.0",
-                template: {
-                    outputs: [
-                        {
-                            simpleText: {
-                                text:string
-                            }
-                        }
-                    ]
-                }
-            };
-            res.status(200).send(responseBody);
+            res.status(200).send(result);
         }
     });
 });
@@ -126,21 +106,21 @@ router.post('/showNonWork',function (req,res) {
         if(err){
             res.status(500).send(err);
         }else{
-            var temp="휴일은";
+            var temp="";
+            var string="휴일은 ";
             for(var i=0; i<result.length; i++){
                 if(i<result.length-1)
-                    temp.concat(result[i].CAL_DAY+", ")
+                    string=string+temp.concat(result[i].CAL_DAY+", ")
                 else
-                temp.concat(result[i].CAL_DAY)
+                    string=string+temp.concat(result[i].CAL_DAY)
             }
-
             const responseBody = {
                 version: "2.0",
                 template: {
                     outputs: [
                         {
                             simpleText: {
-                                text : temp
+                                text : string
                             }
                         }
                     ]
