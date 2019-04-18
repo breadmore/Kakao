@@ -3,7 +3,7 @@ var db = require('../db/gui');
 
 var Date = {
 selectAllDate: function (callback) {
-    return db.query('select CAL_DAY, date_format(now(), \'%d\'), state from jdDate',callback);
+    return db.query('select CAL_DAY, state from jdDate',callback);
 },
 selectNightShift: function (callback) {
         return db.query('select CAL_DAY from jdDate where state = \'야\' ;',callback);
@@ -15,7 +15,7 @@ selectNonShift: function (callback) {
         return db.query('select CAL_DAY from jdDate where state = \'비\' ;',callback);
     },
 selectNonWork: function (callback) {
-        return db.query('select CAL_DAY from jdDate where state = \'휴\' ',callback);
+        return db.query('select CAL_DAY, date_format(now(), \'%d\') from jdDate where state = \'휴\', CAL_DAY>=(date_format(now(), \'%d\')+0)',callback);
     },
 selectDayWork: function (callback) {
         return db.query('select CAL_DAY from jdDate where state = \'주\' ;',callback);
